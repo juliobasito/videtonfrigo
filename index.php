@@ -1,6 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
+require 'model/user.class.php';
 
 $app = new \Slim\Slim(array(
     'view' => '\Slim\LayoutView', // I activate slim layout component
@@ -80,6 +81,7 @@ $app->get('/getAllRecette', function () {
 });
 
 $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
+	User::connexion($pseudo, $password);
 	//retourne userID si ok sinon retourne 0
 });
 $app->run();
