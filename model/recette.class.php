@@ -15,84 +15,122 @@
 		public static function getRecetteByName($recetteName)
 		{
 			include('bdd.php');
-			$sql = $db->prepare("SELECT * FROM recette WHERE NomRecette = :recetteName");
-			$flag = array('recetteName'=>$recetteName);
-			$sql->execute($flag);
+			$sql = $db->prepare("SELECT * FROM recette WHERE NomRecette LIKE '%".$recetteName."%'");
+			$sql->execute();
 			$columns = $sql->fetch();
 			return json_encode($columns);
 		}
 		
-		public static function getRecetteByComplexite($complexite)
+		public static function getRecetteByComplexite($complexite, $userId)
 		{
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM recette WHERE NomRecette <= :complexite");
 			$flag = array('complexite'=>$complexite);
 			$sql->execute($flag);
-			$tab = [];
+			$tab = array();
 			while($columns = $sql->fetch())
 			{
-				$tab[] = $columns;
+				$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
+				$tab[$columns['RecetteId']] = $pourcent;
 			}
+			arsort($tab);
 			return json_encode($tab);
 		}
 		
-		public static function getRecetteByNote($note)
+		public static function getRecetteByNote($note, $userId)
 		{
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM recette WHERE Note >= :note");
 			$flag = array('note'=>$note);
 			$sql->execute($flag);
-			$tab = [];
+			$tab = array();
 			while($columns = $sql->fetch())
 			{
-				$tab[] = $columns;
+				$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
+				$tab[$columns['RecetteId']] = $pourcent;
 			}
+			arsort($tab);
 			return json_encode($tab);
 		}
 		
-		public static function getRecetteByTemps($temps)
+		public static function getRecetteByTemps($temps,$userId)
 		{
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps");
 			$flag = array('temps'=>$temps);
 			$sql->execute($flag);
-			$tab = [];
+			$tab = array();
 			while($columns = $sql->fetch())
 			{
-				$tab[] = $columns;
+				$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
+				$tab[$columns['RecetteId']] = $pourcent;
 			}
+			arsort($tab);
 			return json_encode($tab);
 		}
 		
-		public static function getRecetteByAll($complexite, $note, $temps)
+		public static function getRecetteByAll($complexite, $note, $temps, $userId)
 		{
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps AND Note >= :note AND Complexite <= :complexite ");
 			$flag = array('temps'=>$temps, 'complexite'=> $complexite, 'note'=>$note);
 			$sql->execute($flag);
-			$tab = [];
+			$tab = array();
 			while($columns = $sql->fetch())
 			{
-				$tab[] = $columns;
+				$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
+				$tab[$columns['RecetteId']] = $pourcent;
 			}
+			arsort($tab);
 			return json_encode($tab);
 		}
 		
-		public static function getAllRecette()
+		public static function getAllRecette($userId)
 		{
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM recette");
 			$sql->execute();
-			$tab = [];
+			$tab = array();
 			while($columns = $sql->fetch())
 			{
-				$tab[] =  $columns;
+				$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
+				$tab[$columns['RecetteId']] = $pourcent;
 			}
+			arsort($tab);
 			return json_encode($tab);
 		}
 		
-		public static function getPourcentageIngredient()
+		public static function getPourcentageIngredient($recetteId,$userId)
 		{
+			include('bdd.php');
+			$sql = $db->prepare('SELECT * FROM recette_ingr WHERE RecetteId = :recetteId');
+			$flag = array('recetteId' => $recetteId);
+			$sql->execute($flag);
+			$nbTrue = 0;
+			$nbFalse = 0;
+			while($ingredient = $sql->fetch())
+			{
+				$sql2 = $db->prepare('SELECT count(FrigoId) AS nb , quantite FROM frigo WHERE IngredientId = :ingredientId AND UserId = :userId');
+				$flag2 = array('ingredientId' => $ingredient['IngredientId'], 'userId' => $userId);
+				$sql2->execute($flag2);
+				$sql2 = $sql2->fetch();
+				$nbIngr = $sql2['nb'];
+				if($nbIngr >= 1 && $ingredient['quantite'] <= $sql2['quantite'])
+				{
+					$nbTrue++;
+				}
+				else
+				{
+					$nbFalse++;
+				}
+			}
+			$total = $nbFalse + $nbTrue;
+			$pourcent = 0;
+			if($total != 0)
+			{
+				$pourcent = $nbTrue/$total*100;
+			}
+			return json_encode($pourcent);
 
 		}
 		public static function getIngredientManquant()

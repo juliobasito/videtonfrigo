@@ -1,8 +1,7 @@
 <?php
-session_start();
 try
 {
-	$db = new PDO('mysql:host=localhost;dbname=videtonfrigo', 'root', '');
+	$db = new PDO('mysql:host=localhost;dbname=vtf', 'root', '');
 	$db->query('SET NAMES utf8');
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
