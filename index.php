@@ -86,9 +86,8 @@ $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
 });
 
 //POST ROUTE !!!!
-$app->get('/inscription/:pseudo/:email/:password/:birthdate/:city/:budget', function ($pseudo, $email, $password, $birthdate, $city, $budget) {
+$app->post('/inscription/:pseudo/:email/:password/:birthdate/:city/:budget', function ($pseudo, $email, $password, $birthdate, $city, $budget) {
 	User::inscription($pseudo, $email, $password, $birthdate, $city, $budget);
-	//retourne userID si ok sinon retourne 0
 });
 $app->run();
 
