@@ -5,6 +5,7 @@ require 'model/user.class.php';
 require 'model/ingredient.class.php';
 require 'model/categorie.class.php';
 require 'model/recette.class.php';
+require 'model/frigo.class.php';
 
 $app = new \Slim\Slim(array(
     'view' => '\Slim\LayoutView', // I activate slim layout component
@@ -22,7 +23,8 @@ $app->get('/getAllUser', function() {
 	//renvoi toutes les infos de tous les utilisateurs
 	$user = User::getAllUser();
 	var_dump($user);
-});$app->get('/getIngredientsFrigo/:userId', function ($userId) {
+});
+$app->get('/getIngredientsFrigo/:userId', function ($userId) {
 	Frigo::getIngredientsFrigo($userId);
 	//renvoi tous les ingrédients du frigo de l'utilisateur
 });
@@ -41,10 +43,6 @@ $app->get('/getFrigo/:userId', function ($userId) {
 $app->get('/getAllFrigo', function () {
 	Frigo::getAllFrigo();
 	//renvoi tous les frigos
-});
-});
-$app->get('/getUserFrigo/:frigoId', function ($frigoId) {
-	//renvoi l'utilisateur du frigo
 });
 $app->get('/getIngredientByID/:ingredientID', function ($ingredientID) {
 	//renvoi les infos de l'ingrédient
