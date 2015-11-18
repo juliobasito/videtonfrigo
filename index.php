@@ -22,22 +22,29 @@ $app->get('/getAllUser', function() {
 	//renvoi toutes les infos de tous les utilisateurs
 	$user = User::getAllUser();
 	var_dump($user);
-});
-$app->get('/getIngredientsFrigo/:userId', function ($userId) {
+});$app->get('/getIngredientsFrigo/:userId', function ($userId) {
+	Frigo::getIngredientsFrigo($userId);
 	//renvoi tous les ingrédients du frigo de l'utilisateur
-	
 });
-$app->get('/getIngredientsFrigo/:userId/:filtre', function ($userId, $filtre) {
+$app->get('/getIngredientsFrigoWithFiltre/:userId/:filtre/:donnee', function ($userId, $filtre,$donnee) {
+	Frigo::getIngredientsFrigoWithFiltre($userId,$filtre,$donnee);
 	//renvoi tous les ingrédients du frigo de l'utilisateur avec filtre
 });
 $app->get('/getUserFrigo/:frigoId', function ($frigoId) {
+	Frigo::getUserFrigo($frigoId);
 	//renvoi l'utilisateur du frigo
 });
 $app->get('/getFrigo/:userId', function ($userId) {
+	Frigo::getFrigo($userId);
 	//renvoi le frigo de l'utilisateur
 });
 $app->get('/getAllFrigo', function () {
+	Frigo::getAllFrigo();
 	//renvoi tous les frigos
+});
+});
+$app->get('/getUserFrigo/:frigoId', function ($frigoId) {
+	//renvoi l'utilisateur du frigo
 });
 $app->get('/getIngredientByID/:ingredientID', function ($ingredientID) {
 	//renvoi les infos de l'ingrédient
@@ -101,15 +108,22 @@ $app->get('/getRecetteByComplexite/:complexite', function ($complexite) {
 });
 $app->get('/getRecetteByNote/:note', function ($note) {
 	//renvoi les recettes avec une note > ou =
+	$recette = Recette::getRecetteByNote($note);
+	var_dump($recette);	
 });
-$app->get('/getRecetteByTemps/temps', function ($temps) {
+$app->get('/getRecetteByTemps/:temps', function ($temps) {
 	//renvoi les recettes avec un temps < ou =
+	$recette = Recette::getRecetteByTemps($temps);
+	var_dump($recette);	
 });
 $app->get('/getRecette/:complexite/:note/:temps', function ($complexite, $note, $temps) {
-
+	$recette = Recette::getRecetteByAll($complexite, $note, $temps);
+	var_dump($recette);	
 });
 $app->get('/getAllRecette', function () {
 	//renvoi toutes les recettes
+	$recette = Recette::getAllRecette();
+	var_dump($recette);
 });
 
 $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {

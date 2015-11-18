@@ -2,19 +2,6 @@
 	Class Recette
 	{
 		
-		public static function getAllRecette()
-		{
-			include('bdd.php');
-			$sql = $db->prepare("SELECT * FROM recette");
-			$sql->execute();
-			$tab_recette = [];
-			while($recette = $sql->fetch())
-			{
-				$tab_recette = $recette;
-			}
-			return json_encode($tab_recette);
-		}
-		
 		public static function getRecetteByID($recetteId)
 		{
 			include('bdd.php');
@@ -45,6 +32,61 @@
 			while($columns = $sql->fetch())
 			{
 				$tab[] = $columns;
+			}
+			return json_encode($tab);
+		}
+		
+		public static function getRecetteByNote($note)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("SELECT * FROM recette WHERE Note >= :note");
+			$flag = array('note'=>$note);
+			$sql->execute($flag);
+			$tab = [];
+			while($columns = $sql->fetch())
+			{
+				$tab[] = $columns;
+			}
+			return json_encode($tab);
+		}
+		
+		public static function getRecetteByTemps($temps)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps");
+			$flag = array('temps'=>$temps);
+			$sql->execute($flag);
+			$tab = [];
+			while($columns = $sql->fetch())
+			{
+				$tab[] = $columns;
+			}
+			return json_encode($tab);
+		}
+		
+		public static function getRecetteByAll($complexite, $note, $temps)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps AND Note >= :note AND Complexite <= :complexite ");
+			$flag = array('temps'=>$temps, 'complexite'=> $complexite, 'note'=>$note);
+			$sql->execute($flag);
+			$tab = [];
+			while($columns = $sql->fetch())
+			{
+				$tab[] = $columns;
+			}
+			return json_encode($tab);
+		}
+		
+		public static function getAllRecette()
+		{
+			include('bdd.php');
+			$sql = $db->prepare("SELECT * FROM recette");
+			$sql->execute();
+			$tab = [];
+			while($columns = $sql->fetch())
+			{
+				$tab[] =  $columns;
 			}
 			return json_encode($tab);
 		}
