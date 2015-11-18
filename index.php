@@ -2,6 +2,7 @@
 
 require 'vendor/autoload.php';
 require 'model/user.class.php';
+require 'model/frigo.class.php';
 
 $app = new \Slim\Slim(array(
     'view' => '\Slim\LayoutView', // I activate slim layout component
@@ -17,9 +18,10 @@ $app->get('/getAllUser', function() {
 	//renvoi toutes les infos de tous les utilisateurs
 });
 $app->get('/getIngredientsFrigo/:userId', function ($userId) {
+	Frigo::getIngredientsFrigo($userId);
 	//renvoi tous les ingrédients du frigo de l'utilisateur
 });
-$app->get('/getIngredientsFrigo/:userId/:filtre', function ($userId, $filtre) {
+$app->get('/getIngredientsFrigoWithFiltre/:userId/:filtre/:donnee', function ($userId, $filtre,$donnee) {
 	//renvoi tous les ingrédients du frigo de l'utilisateur avec filtre
 });
 $app->get('/getUserFrigo/:frigoId', function ($frigoId) {

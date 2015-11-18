@@ -7,12 +7,25 @@ class Frigo{
 		$sql = $db->prepare("SELECT * FROM ingredient i JOIN frigo f ON i.IngredientId = f.IngredientId WHERE f.UserId = :userId");
 		$flag = array('userId' =>$userId);
 		$sql->execute($flag);
-		echo json_encode($sql);
+		$tab = [];
+		while($donne = $sql->fetch())
+		{
+			$tab[] = $donne;
+		}
 
+		return json_encode($tab);
 	}
-	public static function getIngredientsFrigo($userId, $filtre)
+	public static function getIngredientsFrigoWithFiltre($userId, $filtre, $donnee)
 	{
-
+		switch ($filtre) {
+			case 'prix':
+				
+				break;
+			
+			default:
+				# code...
+				break;
+		}
 	}
 	public static function getUserFrigo($frigoId)
 	{
