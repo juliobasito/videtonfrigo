@@ -22,6 +22,7 @@ $app->get('/getIngredientsFrigo/:userId', function ($userId) {
 	//renvoi tous les ingrédients du frigo de l'utilisateur
 });
 $app->get('/getIngredientsFrigoWithFiltre/:userId/:filtre/:donnee', function ($userId, $filtre,$donnee) {
+	Frigo::getIngredientsFrigoWithFiltre($userId,$filtre,$donnee);
 	//renvoi tous les ingrédients du frigo de l'utilisateur avec filtre
 });
 $app->get('/getUserFrigo/:frigoId', function ($frigoId) {
