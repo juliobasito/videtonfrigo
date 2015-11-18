@@ -58,15 +58,32 @@ class Frigo{
 	public static function getUserFrigo($frigoId)
 	{
 		include ('bdd.php');
-		$sql = $db->prepare('SELECT * FROM user WHERE ')
+		$sql = $db->prepare('SELECT UserId FROM frigo WHERE FrigoId = :frigoId');
+		$flag = array('frigoId' => $frigoId);
+		$sql->execute($flag);
+		$donnee = $sql->fetch();
+		echo json_encode($donnee);
 	}
 	public static function getFrigo($userId)
 	{
-
+		include ('bdd.php');
+		$sql = $db->prepare('SELECT FrigoId FROM frigo WHERE UserId = :userId');
+		$flag = array('userId' => $userId);
+		$sql->execute($flag);
+		$donnee = $sql->fetch();
+		echo json_encode($donnee);
 	}
 	public static function getAllFrigo()
 	{
-		
+		include ('bdd.php');
+		$sql = $db->prepare('SELECT * FROM frigo');
+		$sql->execute();
+		$tab = [];
+		while($donnee = $sql->fetch())
+		{
+			$tab[] = $donnee;
+		}		
+		return json_encode($tab);
 	}
 
 }
