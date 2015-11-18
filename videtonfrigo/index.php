@@ -2,6 +2,7 @@
 
 require 'vendor/autoload.php';
 require 'model/user.class.php';
+require 'model/ingredient.class.php';
 
 $app = new \Slim\Slim(array(
     'view' => '\Slim\LayoutView', // I activate slim layout component
@@ -38,18 +39,26 @@ $app->get('/getAllFrigo', function () {
 });
 $app->get('/getIngredientByID/:ingredientID', function ($ingredientID) {
 	//renvoi les infos de l'ingrédient
+	$ingredient = Ingredient::getIngredientById($ingredientID);
+	var_dump($ingredient);
 });
 $app->get('/getIngredientByNom/:nom', function ($nom) {
 	//renvoi les infos de l'ingredient
+	$ingredient = Ingredient::getIngredientByName($nom);
+	var_dump($ingredient);
 });
 $app->get('/getIngredientByPrix/:prix', function ($prix) {
 	//renvoi les infos de l'ingredient dont le prix est < ou =
+	$ingredient = Ingredient::getIngredientByPrix($prix);
+	var_dump($ingredient);
 });
 $app->get('/getIngredientByCategorie/:categorie', function ($categorie) {
 	//renvoi tous les ingredients de la catégorie
 });
 $app->get('/getAllIngredient', function () {
 	//renvoi tous les ingredients
+	$ingredient = Ingredient::getAllIngredient();
+	var_dump($ingredient);
 });
 $app->get('/getIngredientByRecette/:recetteId', function ($recetteId) {
 	//renvoi les ingrédients de la recette

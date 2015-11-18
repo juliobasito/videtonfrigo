@@ -34,7 +34,7 @@ class User{
 		$result = $db->prepare($sql);
 		$columns = $result->execute();
 		$columns = $result->fetch();
-		return $columns;
+		return json_encode($columns);
 	}
 	
 	public static function getAllUser()
@@ -48,7 +48,7 @@ class User{
 		{
 			$tab[] = $columns;
 		}
-		return $tab;
+		return json_encode($tab);
 	}
 
 }
