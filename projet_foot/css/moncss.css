@@ -1,0 +1,37 @@
+* {
+padding : 0;
+margin : 0;
+}
+
+body {
+font-family : Calibri;
+}
+
+#corp
+{
+	background-color : #D1D1D0;
+	width : 791px;
+	height : 800px;
+	align-content : center;
+	margin : 30px auto 0 auto;
+	border-radius : 18px;
+	padding-top : 19px;
+}
+
+#titre-resul
+{
+	text-align : center;
+	margin-top : 10px;
+	color : #A6A6A6;
+	text-shadow : 1px 1px #000;
+	font-size : 54px;
+}
+
+#affich-resul
+{
+	text-align : center;
+	font-family : Courrier New ;
+	margin-top : 50px;
+	font-size : 34px;
+	color : #A6A6A6;
+}

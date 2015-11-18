@@ -1,0 +1,255 @@
+strong 
+{ 
+	font-weight : bold ;
+}
+
+h1 , h2
+{ 
+	color : #f80000;
+}
+
+body 
+{ 
+	margin: 0 auto ;
+	width : 960px ;
+	color : black ;
+	background-color : #a2a2a4 ;
+}
+
+#minicorp 
+{
+	background-image : url('images/banniere.png') ;
+	width : 950px ;
+	height : 300px ;
+	margin-top : -20px ;
+	margin-bottom : -10px ;
+	background-color : #433f3e ; 
+}	
+
+#corp
+{
+	background-color : white ; 
+	margin : 0 auto ;
+	width : 960 px ;
+	border : 6px solid red ;
+	border-radius : 10px ;
+	margin-top : 20px ;
+	margin-bottom : 20px ;
+}
+	
+h2
+{
+	border : 12px red double ;
+	border-left : 2px solid black ;
+	border-right : 2px solid black ;
+	border-radius : 10px ;
+} 
+
+a
+{color : #f80000 ;
+}
+
+#navigation li {
+  display : inline ;
+  width:100px;
+  height:50px;
+  border-radius : 10px ;
+  padding : 0 0.5em ;
+}
+
+#navigation {
+	margin: 0 ;
+	padding: 0 ;
+	list-style: none ;
+	text-align: center ;
+	margin-bottom : 30px ;
+	list-style-type : none ;
+	background-image : url('images/fond-menu.png') ;
+	background-repeat : repeat-x ;
+}
+
+#navigation li a
+{
+	padding: -8px 12px ;
+	color: #fff ;
+	font: 1em "Trebuchet MS",Arial,sans-serif ;
+	text-align: center ;
+	text-decoration: none ;
+	margin-bottom : 30px ;
+}
+
+#navigation li:hover
+{
+	text-decoration : underline ;
+}
+
+p
+{
+	font-size : 17px ;
+}
+
+#login a
+{
+	position: absolute;
+	top : 20px ;
+	right : 250px ;
+	padding : 10px ;
+	font-size : 20px ;
+	opacity : 0.9 ;
+	color : red ;
+	border: 6px solid red ;
+	border-radius : 0px 0px 20px 20px;
+}
+
+#login
+{
+	text-align : right ;
+	margin-left : 15px ;
+	margin-top : 20px ;
+}
+
+.titre
+{
+	font-size : 90px ;
+}
+
+li
+{ 
+	font-weight : bold ;
+}
+
+#liphp
+{
+	text-decoration : underline;
+	font-size : 32px ;
+}
+
+img 
+{ 
+	clear : both ;
+	width :450 ;
+	height : 600  ;
+	margin-right : 8px ;
+}
+
+p
+{
+	clear  : both ;
+}
+
+h1
+{
+	clear : both ;
+}
+
+fieldset
+{	
+	width :150px ;
+	margin : auto ;
+}
+
+#envoyer
+{ 
+	margin-top : 1px ;
+	box-shadow : 2px 2px 2px 2px #CCCCCC, 0px 0px 0px #CCCCCC inset ;
+	background-color : #CCCCCC ;
+}
+
+#envoyer : hover
+{
+	box-shadow : 0px 0px 0px #CCCCCC, 2px 2px 2px 0px #CCCCCC inset ;
+}
+
+#rechercher
+{
+	border : 0 ;
+	float : left ;
+	margin-top : 2 px ;
+}
+
+input
+{
+	border-radius : 10px ;
+	background-color : white ;
+	color : red ;
+	border:2px solid red;
+}
+
+#prochainement
+{
+	color : white ;
+	margin-top : 40px ;
+	text-align : center ;
+}
+
+#navigation2 li {
+  display : inline ;
+  width:100px;
+  height:50px;
+  border-radius : 10px ;
+  padding : 0 0.5em ;
+}
+
+#navigation2 {
+	margin: 0 auto ;
+	padding: 0 ;
+	list-style: none ;
+	margin-right : 215px ;
+	width : 536px ;
+	text-align: center ;
+	margin-bottom : 30px ;
+	list-style-type : none ;
+	background-image : url('images/fond-menu.png') ;
+	background-repeat : repeat-x ;
+}
+
+#navigation2 li a
+{
+	padding: -8px 12px ;
+	color: #fff ;
+	font: 1em "Trebuchet MS",Arial,sans-serif ;
+	text-align: center ;
+	text-decoration: none ;
+	margin-bottom : 30px ;
+}
+
+#navigation2 li:hover
+{
+	text-decoration : underline ;
+}
+
+#first 
+{
+	float : left ;
+	text-decoration : none;
+}
+	
+#form_ajout
+{
+	background-color : #FAFAFA;
+	padding : 10px ;
+	width : 280px ;
+	margin-left : 309px ;
+}
+
+#fieldset_ajout
+{
+	padding : 0 20px 20px 20px;
+	margin-bottom : 10px ;
+	border : 1px solid #DF3F3F ;
+}
+
+#legend_ajout
+{
+	color : #DF3F3F;
+	font-wight :bold ;
+}
+
+#fieldset_ajout2
+{
+	padding : 0 20px 20px 20px;
+	margin-bottom : 10px ;
+	border : 1px solid #DF3F3F ;
+	margin-left : -41px ;
+}
+	
