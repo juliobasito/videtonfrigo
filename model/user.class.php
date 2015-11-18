@@ -6,7 +6,8 @@ class User{
 
 	public static function addUser($pseudo, $email, $password, $birthdate, $city, $budget)
 	{
-
+		include('bdd.php');
+		
 	}
 
 	public static function connexion($pseudo, $password)
@@ -19,12 +20,12 @@ class User{
 		if ( sizeof($columns) > 1)
 
 		{
-			$json = json_encode($columns['UserId']);
+			return json_encode($columns['UserId']);
 
 		}
 		else
 		{
-			$json = json_encode($columns['0']);
+			return json_encode($columns['0']);
 		}
 	}
 	public static function getUser($userId)
