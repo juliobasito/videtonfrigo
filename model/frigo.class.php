@@ -90,5 +90,13 @@ class Frigo{
 		$flag = array('UserId'=>$UserId, 'ingredientId'=>$ingredientId);
 		$sql->execute($flag);
 	}
+	
+	public static function ModifFrigo($UserId, $ingredientId, $id)
+	{	
+		include('bdd.php');
+		$sql= $db->prepare('UPDATE `Frigo` SET UserId = :UserId,IngredientId = :ingredientId WHERE FrigoId = :id');
+		$flag = array('UserId'=>$UserId, 'ingredientId'=>$ingredientId, 'id'=>$id);
+		$sql->execute($flag);
+	}
 }
 ?>

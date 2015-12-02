@@ -23,6 +23,14 @@ class User{
 			$json = json_encode($columns['0']);
 		}
 	}
+	public static function UpdateUser($pseudo, $email, $password, $birthdate,$city,$budget, $id)
+	{
+		include('bdd.php');
+		$sql = "UPDATE `user` SET pseudo=:pseudo,email = :email,password = :password,birthdate = :birthdate,city = :city,budget = :budget WHERE UserId = :id)"; 
+		$flag = array('pseudo'=>$pseudo,'email'=>$email,'password'=>$password, 'birthdate'=>$birthdate, 'city'=>$city, 'budget'=>$budget, 'id'=>$_SESSION["id"]);
+		$result = $db->prepare($sql);
+		$columns = $result->execute($flag);
+	}
 	public static function getUser($userId)
 	{
 		include('bdd.php');

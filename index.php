@@ -30,6 +30,14 @@ $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
 	User::connexion($pseudo, $password);
 	//retourne userID si ok sinon retourne 0
 });
+$app->update('/modifUser', function() {
+	//modifier utilisateur
+	$user = User::UpdateUser($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST["birthdate"],$_POST["city"],$_POST["budget"], $_POST["id"]);
+});
+$app->delete('/delUser', function() {
+	//modifier utilisateur
+	$user = User::DeleteUser($_POST["id"]);
+});
 /*--------------------------------------------------
 						FRIGO
 --------------------------------------------------*/
@@ -55,6 +63,10 @@ $app->get('/getAllFridge', function () {
 });
 $app->post('/AddFrigo', function () {
 	Frigo::AddFrigo($_POST["userid"], $_POST["ingredientid"]);
+	//ajoute un frigo
+});
+$app->update('/ModifFrigo', function () {
+	Frigo::ModifFrigo($_POST["userid"], $_POST["ingredientid"], $_POST["id"]);
 	//ajoute un frigo
 });
 /*--------------------------------------------------
@@ -86,7 +98,11 @@ $app->get('/getIngredientByRecette/:recetteId', function ($recetteId) {
 });
 $app->post('/AddIngredient', function () {
 	//Ajoute un ingredient
-	$ingredient = Ingredient::AddIngredient($_POST["nom"], $_POST["prix"], $_POST["peremption"], $_POST["quantite"]);
+	$ingredient = Ingredient::AddIngredient($_POST["nom"], $_POST["prix"], $_POST["unite"]);
+});
+$app->update('/ModifIngredient', function () {
+	//Ajoute un ingredient
+	$ingredient = Ingredient::ModifIngredient($_POST["nom"], $_POST["prix"], $_POST["unite"], $_POST["id"]);
 });
 /*--------------------------------------------------
 						CATEGORY
@@ -107,6 +123,10 @@ $app->get('/getAllCategory', function () {
 $app->post('/AddCategorie', function () {
 	//ajoute une categorie
 	$categorie = Categorie::AddCategorie($_POST["nomCategorie"]);
+});
+$app->update('/ModifCategorie', function () {
+	//ajoute une categorie
+	$categorie = Categorie::ModifCategorie($_POST["nomCategorie"], $_POST["id"]);
 });
 /*--------------------------------------------------
 						RECETTE
@@ -160,6 +180,10 @@ $app->post('/addRecette_ingr', function () {
 $app->post('/delRecette', function () {
 	//Ajoute une recette
 	$recette = Recette::delRecette($_POST['id']);
+});
+$app->update('/ModifRecette', function () {
+	//Ajoute une recette
+	$recette = Recette::ModifRecette($_POST['nomRecette'],$_POST['complexite'],$_POST['note'],$_POST['temps'],$_POST['nbPersonne'],$_POST['description'],$_POST['id']);
 });
 $app->run();
 

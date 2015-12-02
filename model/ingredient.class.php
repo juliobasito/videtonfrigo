@@ -82,11 +82,19 @@ class Ingredient
 		return json_encode($tab);
 	}
 	
-	public static function AddIngredient($nom, $prix, $peremption ,$quantite)
+	public static function AddIngredient($nom, $prix, $unite)
 	{
 		include('bdd.php');
-		$sql = $db->prepare("INSERT INTO Ingredient(nom, prix, peremption, quantite) VALUES (:nom, :prix, :peremption, :quantite)");
-		$flag = array("nom"=>$nom, "prix"=>$prix, "peremption"=>$peremption, "quantite"=>$quantite);
+		$sql = $db->prepare("INSERT INTO Ingredient(nom, prix, unite) VALUES (:nom, :prix, :unite)");
+		$flag = array("nom"=>$nom, "prix"=>$prix, "unite"=>$unite);
+		$sql->execute($flag);
+	}
+	
+	public static function ModifIngredient($nom, $prix, $unite, $id)
+	{
+		include('bdd.php');
+		$sql = $db->prepare("UPDATE Ingredient SET nom = :nom, prix = :prix, unite = :unite WHERE IngredientId = :id");
+		$flag = array("nom"=>$nom, "prix"=>$prix, "unite"=>$unite, "id"=>$id);
 		$sql->execute($flag);
 	}
 

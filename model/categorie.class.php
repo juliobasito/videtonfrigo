@@ -64,5 +64,13 @@
 			$flag = array("nomCategorie"=>$nomcategorie);
 			$sql->execute($flag);
 		}
+		
+		public static function ModifCategorie($nomcategorie, $id)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("UPDATE categorie SET nomCategorie = :nomCategorie WHERE CategorieId = :id");
+			$flag = array("nomCategorie"=>$nomcategorie, "id"=>$id);
+			$sql->execute($flag);
+		}
 	}
 ?>

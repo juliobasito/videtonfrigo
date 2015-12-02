@@ -154,5 +154,12 @@ Class Recette
 			$flag = array("recetteId"=>$recetteid, "nomrecette"=>$nomrecette, "complexite"=>$complexite, "note"=>$note, "temps"=>$temps, "nbpersonne"=>$nbpersonne, "description"=>$description, "urlimg"=>$urlimg);
 			$sql->execute($flag);
 		}
+		public static function ModifRecette($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg, $id)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("UPDATE `recette` SET nomrecette = :nomrecette,complexite = :complexite,note= :note,temps= :temps,nbpersonne= :nbpersonne,description= :description,urlimg= :urlimg WHERE RecetteId = :id");
+			$flag = array("recetteId"=>$recetteid, "nomrecette"=>$nomrecette, "complexite"=>$complexite, "note"=>$note, "temps"=>$temps, "nbpersonne"=>$nbpersonne, "description"=>$description, "urlimg"=>$urlimg, "id"=>$id);
+			$sql->execute($flag);
+		}
 	}
 ?>
