@@ -1,18 +1,15 @@
 <?php
 	class Categorie
 	{
-		public static function getCategorieName($categorie)
+		public static function getCategoryName($categorie)
 		{
-			include('bdd.php');
-			$sql = $db->prepare("SELECT * FROM categorie WHERE NomCategorie = :categorie");
-			$flag = array('categorie'=>$categorie);
-			$sql->execute($flag);
-			$columns = $sql->fetch();
-			return json_encode($columns);
-		}
-		
-		public static function getCategorieId($categorie)
-		{
+			/*============================================================
+
+			getCategoryName(string categorie)
+
+			Retourne le nom de la catégorie de l'id passé en paramètre
+
+			==============================================================*/
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM categorie WHERE CategorieId = :categorie");
 			$flag = array('categorie'=>$categorie);
@@ -21,9 +18,34 @@
 			return json_encode($columns);
 		}
 		
-		
-		public static function getAllCategorie()
+		public static function getCategoryId($categorie)
 		{
+			/*============================================================
+			
+			getCategoryId(string categorie)
+
+			Retourne l'id  de la catégorie avec pour nom celui passé en paramètre
+
+			==============================================================*/
+			include('bdd.php');
+			$sql = $db->prepare("SELECT * FROM categorie WHERE NomCategorie = :categorie");
+			$flag = array('categorie'=>$categorie);
+			$sql->execute($flag);
+			$columns = $sql->fetch();
+			return json_encode($columns);
+			
+		}
+		
+		
+		public static function getAllCategory()
+		{
+			/*============================================================
+			
+			getAllCategory()
+
+			Retourne les informations de toutes les catégories.
+
+			==============================================================*/
 			include('bdd.php');
 			$sql = $db->prepare("SELECT * FROM categorie");
 			$sql->execute();

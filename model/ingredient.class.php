@@ -40,14 +40,14 @@ class Ingredient
 	public static function getAllIngredient()
 	{
 		include('bdd.php');
-		$sql = $db->prepare("SELECT * FROM ingredient");
+		$sql = $db->prepare("SELECT * FROM ingredient ORDER BY Nom");
 		$sql->execute();
 		$tab = [];
 		while($ingredient = $sql->fetch())
 		{
 			$tab[] = $ingredient;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	public static function addIngredient($userID, $ingredientId)
 	{

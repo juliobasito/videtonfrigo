@@ -12,7 +12,7 @@ $app = new \Slim\Slim(array(
     'layout' => 'layouts/main.php' // I define my main layout
     ));
 /*--------------------------------------------------
-                    GET ROUTE
+						USER
 --------------------------------------------------*/
 $app->get('/getUser/:userId', function ($userId) {
 	//renvoi les infos de l'utilisateur
@@ -22,26 +22,37 @@ $app->get('/getAllUser', function() {
 	//renvoi toutes les infos de tous les utilisateurs
 	$user = User::getAllUser();
 });
-$app->get('/getIngredientsFrigo/:userId', function ($userId) {
-	Frigo::getIngredientsFrigo($userId);
+
+$app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
+	User::connexion($pseudo, $password);
+	//retourne userID si ok sinon retourne 0
+});
+/*--------------------------------------------------
+						FRIGO
+--------------------------------------------------*/
+$app->get('/getIngredientsFridge/:userId', function ($userId) {
+	Frigo::getIngredientsFridge($userId);
 	//renvoi tous les ingrédients du frigo de l'utilisateur
 });
-$app->get('/getIngredientsFrigoWithFiltre/:userId/:filtre/:donnee', function ($userId, $filtre,$donnee) {
-	Frigo::getIngredientsFrigoWithFiltre($userId,$filtre,$donnee);
+$app->get('/getIngredientsFridgeWithFiltre/:userId/:filtre/:donnee', function ($userId, $filtre,$donnee) {
+	Frigo::getIngredientsFridgeWithFiltre($userId,$filtre,$donnee);
 	//renvoi tous les ingrédients du frigo de l'utilisateur avec filtre
 });
-$app->get('/getUserFrigo/:frigoId', function ($frigoId) {
-	Frigo::getUserFrigo($frigoId);
+$app->get('/getUserFridge/:frigoId', function ($frigoId) {
+	Frigo::getUserFridge($frigoId);
 	//renvoi l'utilisateur du frigo
 });
-$app->get('/getFrigo/:userId', function ($userId) {
-	Frigo::getFrigo($userId);
+$app->get('/getFridge:userId', function ($userId) {
+	Frigo::getFridge($userId);
 	//renvoi le frigo de l'utilisateur
 });
-$app->get('/getAllFrigo', function () {
-	Frigo::getAllFrigo();
+$app->get('/getAllFridge', function () {
+	Frigo::getAllFridge();
 	//renvoi tous les frigos
 });
+/*--------------------------------------------------
+					INGREDIENT
+--------------------------------------------------*/
 $app->get('/getIngredientByID/:ingredientID', function ($ingredientID) {
 	//renvoi les infos de l'ingrédient
 	$ingredient = Ingredient::getIngredientById($ingredientID);
@@ -66,21 +77,31 @@ $app->get('/getIngredientByRecette/:recetteId', function ($recetteId) {
 	//renvoi les ingrédients de la recette
 	$ingredient = Ingredient::getIngredientByRecette($recetteId);
 });
-$app->get('/getCategorieName/:categorieName', function ($categorieName) {
-	//renvoi le nom de la catégorie
-	$categorie = Categorie::getCategorieName($categorieName);
+/*--------------------------------------------------
+						CATEGORY
+--------------------------------------------------*/
+$app->get('/getCategoryName/:categoryId', function ($categoryId) {
+	//Retourne le nom de la catégorie de l'id passé en paramètre
+	$category = Categorie::getCategoryName($categoryId);
 });
-$app->get('/getCategorieID/:categorieId', function ($categorieId) {
-	//renvoi l'id de la catégorie
-	$categorie = Categorie::getCategorieId($categorieId);
+$app->get('/getCategoryID/:categoryName', function ($categoryName) {
+	//Retourne l'id  de la catégorie avec pour nom celui passé en paramètre
+	$category = Categorie::getCategoryId($categoryId);
 });
-$app->get('/getAllCategorie', function () {
+$app->get('/getAllCategory', function () {
 	//renvoi toutes les catégories
-	$categorie = Categorie::getAllCategorie();
+	$categorie = Categorie::getAllCategory();
+});
+/*--------------------------------------------------
+						RECETTE
+--------------------------------------------------*/
+$app->get('/getRecette', function () {
+	//renvoi les infos de la recette
+	Recette::getRecette();
 });
 $app->get('/getRecetteByID/:recetteID', function ($recetteID) {
 	//renvoi les infos de la recette
-	$recette = Recette::getRecetteByID($recetteID);
+	Recette::getRecetteByID($recetteID);
 });
 $app->get('/getRecetteByName/:nomRecette', function ($nomRecette) {
 	//renvoi les infos de la recette
@@ -109,9 +130,17 @@ $app->get('/getPourcentageIngredient/:recetteId/:userId', function ($recetteId,$
 	//renvoi le pourcentage de recette 
 	$recette = Recette::getPourcentageIngredient($recetteId, $userId);
 });
-$app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
-	User::connexion($pseudo, $password);
-	//retourne userID si ok sinon retourne 0
+$app->post('/addRecette', function () {
+	//Ajoute une recette
+	$recette = Recette::addRecette($_POST['nomRecette'],$_POST['complexite'],$_POST['note'],$_POST['temps'],$_POST['nbPersonne'],$_POST['description']);
+});
+$app->post('/addRecette_ingr', function () {
+	//Ajoute une recette
+	$recette = Recette::addRecette_ingr($_POST['ingredientId'],$_POST['recetteId'],$_POST['quantite']);
+});
+$app->post('/delRecette', function () {
+	//Ajoute une recette
+	$recette = Recette::delRecette($_POST['id']);
 });
 $app->run();
 
