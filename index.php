@@ -30,7 +30,7 @@ $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
 	User::connexion($pseudo, $password);
 	//retourne userID si ok sinon retourne 0
 });
-$app->update('/modifUser', function() {
+$app->put('/modifUser', function() {
 	//modifier utilisateur
 	$user = User::UpdateUser($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST["birthdate"],$_POST["city"],$_POST["budget"], $_POST["id"]);
 });
@@ -65,7 +65,7 @@ $app->post('/AddFrigo', function () {
 	Frigo::AddFrigo($_POST["userid"], $_POST["ingredientid"]);
 	//ajoute un frigo
 });
-$app->update('/ModifFrigo', function () {
+$app->put('/ModifFrigo', function () {
 	Frigo::ModifFrigo($_POST["userid"], $_POST["ingredientid"], $_POST["id"]);
 	//ajoute un frigo
 });
@@ -100,7 +100,7 @@ $app->post('/AddIngredient', function () {
 	//Ajoute un ingredient
 	$ingredient = Ingredient::AddIngredient($_POST["nom"], $_POST["prix"], $_POST["unite"]);
 });
-$app->update('/ModifIngredient', function () {
+$app->put('/ModifIngredient', function () {
 	//Ajoute un ingredient
 	$ingredient = Ingredient::ModifIngredient($_POST["nom"], $_POST["prix"], $_POST["unite"], $_POST["id"]);
 });
@@ -124,7 +124,7 @@ $app->post('/AddCategorie', function () {
 	//ajoute une categorie
 	$categorie = Categorie::AddCategorie($_POST["nomCategorie"]);
 });
-$app->update('/ModifCategorie', function () {
+$app->put('/ModifCategorie', function () {
 	//ajoute une categorie
 	$categorie = Categorie::ModifCategorie($_POST["nomCategorie"], $_POST["id"]);
 });
@@ -181,7 +181,7 @@ $app->post('/delRecette', function () {
 	//Ajoute une recette
 	$recette = Recette::delRecette($_POST['id']);
 });
-$app->update('/ModifRecette', function () {
+$app->put('/ModifRecette', function () {
 	//Ajoute une recette
 	$recette = Recette::ModifRecette($_POST['nomRecette'],$_POST['complexite'],$_POST['note'],$_POST['temps'],$_POST['nbPersonne'],$_POST['description'],$_POST['id']);
 });
