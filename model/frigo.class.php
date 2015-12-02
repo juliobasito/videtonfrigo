@@ -1,6 +1,6 @@
 <?php
 class Frigo{
-	public static function getIngredientsFrigo($userId)
+	public static function getIngredientsFridge($userId)
 	{
 		include('bdd.php');
 		$sql = $db->prepare("SELECT * FROM ingredient i JOIN frigo f ON i.IngredientId = f.IngredientId WHERE f.UserId = :userId");
@@ -13,7 +13,7 @@ class Frigo{
 		}
 		return json_encode($tab);
 	}
-	public static function getIngredientsFrigoWithFiltre($userId, $filtre, $donnee)
+	public static function getIngredientsFridgeWithFiltre($userId, $filtre, $donnee)
 	{
 		include('bdd.php');
 		switch ($filtre) {
@@ -52,7 +52,7 @@ class Frigo{
 			break;
 		}
 	}
-	public static function getUserFrigo($frigoId)
+	public static function getUserFridge($frigoId)
 	{
 		include ('bdd.php');
 		$sql = $db->prepare('SELECT UserId FROM frigo WHERE FrigoId = :frigoId');
@@ -61,7 +61,7 @@ class Frigo{
 		$donnee = $sql->fetch();
 		echo json_encode($donnee);
 	}
-	public static function getFrigo($userId)
+	public static function getFridge($userId)
 	{
 		include ('bdd.php');
 		$sql = $db->prepare('SELECT FrigoId FROM frigo WHERE UserId = :userId');
@@ -70,7 +70,7 @@ class Frigo{
 		$donnee = $sql->fetch();
 		echo json_encode($donnee);
 	}
-	public static function getAllFrigo()
+	public static function getAllFridge()
 	{
 		include ('bdd.php');
 		$sql = $db->prepare('SELECT * FROM frigo');
