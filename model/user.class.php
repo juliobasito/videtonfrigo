@@ -64,6 +64,14 @@ class User{
 		$columns = $result->execute($flag);
 	}
 	
+	public static function DelUser($id)
+	{
+		include('bdd.php');
+		$sql = "DELETE FROM user WHERE UserId = :id";
+		$flag = array("id"=>$id);
+		$result = $db->prepare($sql);
+		$columsn = $result->execute($flag);
+	}
 
 }
 ?>

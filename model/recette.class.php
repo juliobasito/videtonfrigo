@@ -161,5 +161,12 @@ Class Recette
 			$flag = array("recetteId"=>$recetteid, "nomrecette"=>$nomrecette, "complexite"=>$complexite, "note"=>$note, "temps"=>$temps, "nbpersonne"=>$nbpersonne, "description"=>$description, "urlimg"=>$urlimg, "id"=>$id);
 			$sql->execute($flag);
 		}
+		public static function DelRecette($id)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("DELETE FROM recette WHERE RecetteId = :id");
+			$flag = array("id"=>$id);
+			$sql->execute($flag);
+		}
 	}
 ?>

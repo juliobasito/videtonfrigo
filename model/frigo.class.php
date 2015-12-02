@@ -98,5 +98,12 @@ class Frigo{
 		$flag = array('UserId'=>$UserId, 'ingredientId'=>$ingredientId, 'id'=>$id);
 		$sql->execute($flag);
 	}
+	public static function DelFrigo($id)
+	{	
+		include('bdd.php');
+		$sql= $db->prepare('DELETE FROM Frigo WHERE FrigoId =:id');
+		$flag = array('id'=>$id);
+		$sql->execute($flag);
+	}
 }
 ?>

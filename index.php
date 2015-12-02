@@ -69,6 +69,10 @@ $app->put('/ModifFrigo', function () {
 	Frigo::ModifFrigo($_POST["userid"], $_POST["ingredientid"], $_POST["id"]);
 	//ajoute un frigo
 });
+$app->delete('/DelFrigo', function () {
+	Frigo::ModifFrigo($_POST["id"]);
+	//ajoute un frigo
+});
 /*--------------------------------------------------
 					INGREDIENT
 --------------------------------------------------*/
@@ -104,6 +108,10 @@ $app->put('/ModifIngredient', function () {
 	//Ajoute un ingredient
 	$ingredient = Ingredient::ModifIngredient($_POST["nom"], $_POST["prix"], $_POST["unite"], $_POST["id"]);
 });
+$app->delete('/DelIngredient', function () {
+	//Ajoute un ingredient
+	$ingredient = Ingredient::DelIngredient($_POST["id"]);
+});
 /*--------------------------------------------------
 						CATEGORY
 --------------------------------------------------*/
@@ -127,6 +135,10 @@ $app->post('/AddCategorie', function () {
 $app->put('/ModifCategorie', function () {
 	//ajoute une categorie
 	$categorie = Categorie::ModifCategorie($_POST["nomCategorie"], $_POST["id"]);
+});
+$app->delete('/DelCategorie', function () {
+	//ajoute une categorie
+	$categorie = Categorie::DelCategorie($_POST["id"]);
 });
 /*--------------------------------------------------
 						RECETTE
@@ -184,6 +196,10 @@ $app->post('/delRecette', function () {
 $app->put('/ModifRecette', function () {
 	//Ajoute une recette
 	$recette = Recette::ModifRecette($_POST['nomRecette'],$_POST['complexite'],$_POST['note'],$_POST['temps'],$_POST['nbPersonne'],$_POST['description'],$_POST['id']);
+});
+$app->delete('/DelRecette', function () {
+	//Ajoute une recette
+	$recette = Recette::DelRecette($_POST['id']);
 });
 $app->run();
 

@@ -72,5 +72,13 @@
 			$flag = array("nomCategorie"=>$nomcategorie, "id"=>$id);
 			$sql->execute($flag);
 		}
+		
+		public static function DelCategorie($id)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("DELETE FROM categorie WHERE CategorieId = :id");
+			$flag = array("id"=>$id);
+			$sql->execute($flag);
+		}
 	}
 ?>

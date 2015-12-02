@@ -97,6 +97,14 @@ class Ingredient
 		$flag = array("nom"=>$nom, "prix"=>$prix, "unite"=>$unite, "id"=>$id);
 		$sql->execute($flag);
 	}
+	
+	public static function DelIngredient($id)
+	{
+		include('bdd.php');
+		$sql = $db->prepare("DELETE FROM Ingredient WHERE IngredientId = :id");
+		$flag = array("id"=>$id);
+		$sql->execute($flag);
+	}
 
 }
 ?>
