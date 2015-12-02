@@ -21,7 +21,7 @@ Class Recette
 		$flag = array('recetteId'=>$recetteId);
 		$sql->execute($flag);
 		$columns = $sql->fetch();
-		return json_encode($columns);
+		echo json_encode($columns);
 	}
 
 	public static function getRecetteByName($recetteName)
@@ -50,7 +50,7 @@ Class Recette
 			$tab[$columns['RecetteId']] = $pourcent;
 		}
 		arsort($tab);
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 
 	public static function getRecetteByNote($note, $userId)
@@ -66,7 +66,7 @@ Class Recette
 			$tab[$columns['RecetteId']] = $pourcent;
 		}
 		arsort($tab);
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 
 	public static function getRecetteByTemps($temps,$userId)
@@ -82,7 +82,7 @@ Class Recette
 			$tab[$columns['RecetteId']] = $pourcent;
 		}
 		arsort($tab);
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 
 	public static function getRecetteByAll($complexite, $note, $temps, $userId)
@@ -98,7 +98,7 @@ Class Recette
 			$tab[$columns['RecetteId']] = $pourcent;
 		}
 		arsort($tab);
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 
 	public static function getAllRecette($userId)
@@ -113,7 +113,7 @@ Class Recette
 			$tab[$columns['RecetteId']] = $pourcent;
 		}
 		arsort($tab);
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 
 	public static function getPourcentageIngredient($recetteId,$userId)

@@ -11,7 +11,7 @@ class Frigo{
 		{
 			$tab[] = $donne;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	public static function getIngredientsFridgeWithFiltre($userId, $filtre, $donnee)
 	{
@@ -26,7 +26,7 @@ class Frigo{
 				{
 					$tab[] = $ingredient;
 				}
-				return json_encode($tab);
+				echo json_encode($tab);
 			break;
 			case 'nom':
 				$sql = $db->prepare("SELECT * FROM ingredient i JOIN frigo f ON i.IngredientId = f.IngredientId WHERE i.Nom <= :nom AND f.userId = :userId");
@@ -37,7 +37,7 @@ class Frigo{
 				{
 					$tab[] = $ingredient;
 				}
-				return json_encode($tab);
+				echo json_encode($tab);
 			break;
 			case 'nom':
 				$sql = $db->prepare("SELECT * FROM ingredient i JOIN frigo f ON i.IngredientId = f.IngredientId WHERE i.Nom <= :nom AND f.userId = :userId");
@@ -48,7 +48,7 @@ class Frigo{
 				{
 					$tab[] = $ingredient;
 				}
-				return json_encode($tab);
+				echo json_encode($tab);
 			break;
 		}
 	}
@@ -80,7 +80,7 @@ class Frigo{
 		{
 			$tab[] = $donnee;
 		}		
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	
 	public static function AddFrigo($UserId, $ingredientId)

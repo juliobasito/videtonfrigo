@@ -15,7 +15,7 @@
 			$flag = array('categorie'=>$categorie);
 			$sql->execute($flag);
 			$columns = $sql->fetch();
-			return json_encode($columns);
+			echo json_encode($columns);
 		}
 		
 		public static function getCategoryId($categorie)
@@ -32,7 +32,7 @@
 			$flag = array('categorie'=>$categorie);
 			$sql->execute($flag);
 			$columns = $sql->fetch();
-			return json_encode($columns);
+			echo json_encode($columns);
 			
 		}
 		
@@ -54,7 +54,7 @@
 			{
 				$tab[] = $columns;
 			}
-			return json_encode($tab);
+			echo json_encode($tab);
 		}
 		
 		public static function AddCategorie($nomcategorie)

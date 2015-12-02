@@ -38,7 +38,7 @@ class User{
 		$result = $db->prepare($sql);
 		$columns = $result->execute();
 		$columns = $result->fetch();
-		return json_encode($columns);
+		echo json_encode($columns);
 	}
 	
 	public static function getAllUser()
@@ -52,7 +52,7 @@ class User{
 		{
 			$tab[] = $columns;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	
 	public static function AddUser($pseudo, $email, $password, $birthdate,$city,$budget)

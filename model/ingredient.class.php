@@ -10,7 +10,7 @@ class Ingredient
 		$flag = array('ingredientId'=>$ingredientId);
 		$sql->execute($flag);
 		$ingredient = $sql->fetch();
-		return json_encode($ingredient);
+		echo json_encode($ingredient);
 	}
 	
 	public static function getIngredientByName($nom)
@@ -20,7 +20,7 @@ class Ingredient
 		$flag = array('nom'=>$nom);
 		$sql->execute($flag);
 		$ingredient = $sql->fetch();
-		return json_encode($ingredient);
+		echo json_encode($ingredient);
 	}
 	
 	public static function getIngredientByPrix($prix)
@@ -34,7 +34,7 @@ class Ingredient
 		{
 			$tab[] = $ingredient;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	
 	public static function getAllIngredient()
@@ -65,7 +65,7 @@ class Ingredient
 		{
 			$tab[] = $ingredient;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	
 	public static function getIngredientByCategorie($categorieID)
@@ -79,7 +79,7 @@ class Ingredient
 		{
 			$tab[] = $ingredient;
 		}
-		return json_encode($tab);
+		echo json_encode($tab);
 	}
 	
 	public static function AddIngredient($nom, $prix, $unite)
