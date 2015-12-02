@@ -189,10 +189,6 @@ $app->post('/addRecette_ingr', function () {
 	//Ajoute une recette
 	$recette = Recette::addRecette_ingr($_POST['ingredientId'],$_POST['recetteId'],$_POST['quantite']);
 });
-$app->post('/delRecette', function () {
-	//Ajoute une recette
-	$recette = Recette::delRecette($_POST['id']);
-});
 $app->put('/ModifRecette', function () {
 	//Ajoute une recette
 	$recette = Recette::ModifRecette($_POST['nomRecette'],$_POST['complexite'],$_POST['note'],$_POST['temps'],$_POST['nbPersonne'],$_POST['description'],$_POST['id']);
