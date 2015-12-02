@@ -34,5 +34,13 @@
 			}
 			return json_encode($tab);
 		}
+		
+		public static function AddCategorie($nomcategorie)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("INSERT INTO categorie(nomCategorie) VALUES (:nomCategorie)");
+			$flag = array("nomCategorie"=>$nomcategorie);
+			$sql->execute($flag);
+		}
 	}
 ?>

@@ -49,10 +49,7 @@ class Ingredient
 		}
 		return json_encode($tab);
 	}
-	public static function addIngredient($userID, $ingredientId)
-	{
 
-	}
 	public static function deleteIngredientFrigo($ingredientId)
 	{
 
@@ -83,6 +80,14 @@ class Ingredient
 			$tab[] = $ingredient;
 		}
 		return json_encode($tab);
+	}
+	
+	public static function AddIngredient($nom, $prix, $peremption ,$quantite)
+	{
+		include('bdd.php');
+		$sql = $db->prepare("INSERT INTO Ingredient(nom, prix, peremption, quantite) VALUES (:nom, :prix, :peremption, :quantite)");
+		$flag = array("nom"=>$nom, "prix"=>$prix, "peremption"=>$peremption, "quantite"=>$quantite);
+		$sql->execute($flag);
 	}
 
 }

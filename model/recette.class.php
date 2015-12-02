@@ -137,5 +137,13 @@
 		{
 			
 		}
+		
+		public static function addRecette($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg)
+		{
+			include('bdd.php');
+			$sql = $db->prepare("INSERT INTO `recette`(`RecetteId`, `NomRecette`, `Complexite`, `Note`, `Temps`, `nbPersonne`, `description`, `URLimg`) VALUES (:nomrecette, :complexite, :note, :temps, :nbpersonne, :description, :urlimg)");
+			$flag = array("recetteId"=>$recetteid, "nomrecette"=>$nomrecette, "complexite"=>$complexite, "note"=>$note, "temps"=>$temps, "nbpersonne"=>$nbpersonne, "description"=>$description, "urlimg"=>$urlimg);
+			$sql->execute($flag);
+		}
 	}
 ?>

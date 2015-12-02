@@ -82,5 +82,13 @@ class Frigo{
 		}		
 		return json_encode($tab);
 	}
+	
+	public static function AddFrigo($UserId, $ingredientId)
+	{	
+		include('bdd.php');
+		$sql= $db->prepare('INSERT INTO `Frigo` (UserId, IngredientId) VALUES (:UserId, :ingredientId)');
+		$flag = array('UserId'=>$UserId, 'ingredientId'=>$ingredientId);
+		$sql->execute($flag);
+	}
 }
 ?>

@@ -4,10 +4,6 @@
 
 class User{
 
-	public static function addUser($pseudo, $email, $password, $birthdate, $city, $budget)
-	{
-
-	}
 
 	public static function connexion($pseudo, $password)
 	{
@@ -50,6 +46,16 @@ class User{
 		}
 		return json_encode($tab);
 	}
+	
+	public static function AddUser($pseudo, $email, $password, $birthdate,$city,$budget)
+	{
+		include('bdd.php');
+		$sql = "INSERT INTO `user`(pseudo, email, password, birthdate, city, budget) VALUES (:pseudo, :email, :password, :birthdate,:city,:budget)"; 
+		$flag = array('pseudo'=>$pseudo,'email'=>$email,'password'=>$password, 'birthdate'=>$birthdate, 'city'=>$city, 'budget'=>$budget);
+		$result = $db->prepare($sql);
+		$columns = $result->execute($flag);
+	}
+	
 
 }
 ?>
