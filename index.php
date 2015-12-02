@@ -22,9 +22,9 @@ $app->get('/getAllUser', function() {
 	//renvoi toutes les infos de tous les utilisateurs
 	$user = User::getAllUser();
 });
-$app->get('/AddUser/:pseudo/:email/:password/:birthdate/:city/:budget', function($pseudo, $email, $password, $birthdate,$city,$budget) {
+$app->post('/AddUser', function() {
 	//ajoute un utilisateur
-	$user = User::AddUser($pseudo, $email, $password, $birthdate,$city,$budget);
+	$user = User::AddUser($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST["birthdate"],$_POST["city"],$_POST["budget"]);
 });
 $app->get('/connexion/:pseudo/:password', function ($pseudo, $password) {
 	User::connexion($pseudo, $password);
@@ -53,8 +53,8 @@ $app->get('/getAllFridge', function () {
 	Frigo::getAllFridge();
 	//renvoi tous les frigos
 });
-$app->get('/AddFrigo/:userid/:ingredientid', function ($userid, $ingredientid) {
-	Frigo::AddFrigo($userid, $ingredientid);
+$app->post('/AddFrigo', function () {
+	Frigo::AddFrigo($_POST["userid"], $_POST["ingredientid"]);
 	//ajoute un frigo
 });
 /*--------------------------------------------------
@@ -84,9 +84,9 @@ $app->get('/getIngredientByRecette/:recetteId', function ($recetteId) {
 	//renvoi les ingrédients de la recette
 	$ingredient = Ingredient::getIngredientByRecette($recetteId);
 });
-$app->get('/AddIngredient/:nom/:prix/:peremption/:quantite', function ($nom, $prix, $peremption, $quantite) {
+$app->post('/AddIngredient', function () {
 	//Ajoute un ingredient
-	$ingredient = Ingredient::AddIngredient($nom, $prix, $peremption, $quantite);
+	$ingredient = Ingredient::AddIngredient($_POST["nom"], $_POST["prix"], $_POST["peremption"], $_POST["quantite"]);
 });
 /*--------------------------------------------------
 						CATEGORY
@@ -103,6 +103,11 @@ $app->get('/getAllCategory', function () {
 	//renvoi toutes les catégories
 	$categorie = Categorie::getAllCategory();
 });
+
+$app->post('/AddCategorie', function () {
+	//ajoute une categorie
+	$categorie = Categorie::AddCategorie($_POST["nomCategorie"]);
+});
 /*--------------------------------------------------
 						RECETTE
 --------------------------------------------------*/
@@ -110,10 +115,7 @@ $app->get('/getRecette', function () {
 	//renvoi les infos de la recette
 	Recette::getRecette();
 });
-$app->get('/AddCategorie/:nomCategorie', function ($nomCategorie) {
-	//ajoute une categorie
-	$categorie = Categorie::AddCategorie($nomCategorie);
-});
+
 
 $app->get('/getRecetteByID/:recetteID', function ($recetteID) {
 	//renvoi les infos de la recette
@@ -145,10 +147,6 @@ $app->get('/getAllRecette/:userId', function ($userId) {
 $app->get('/getPourcentageIngredient/:recetteId/:userId', function ($recetteId,$userId) {
 	//renvoi le pourcentage de recette 
 	$recette = Recette::getPourcentageIngredient($recetteId, $userId);
-});
-$app->get('/AddRecette/:nomrecette/:complexite/:note/:temps/:nbpersonne/:description/:urlimg', function ($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg) {
-	//renvoi toutes les catégories
-	$recette = Recette::AddRecette($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg);
 });
 
 $app->post('/addRecette', function () {

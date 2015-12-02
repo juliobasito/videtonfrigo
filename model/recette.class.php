@@ -146,7 +146,7 @@ Class Recette
 		{
 			$pourcent = $nbTrue/$total*100;
 		}
-		
+		}
 		public static function addRecette($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg)
 		{
 			include('bdd.php');
