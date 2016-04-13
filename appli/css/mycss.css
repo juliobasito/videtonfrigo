@@ -1,0 +1,23 @@
+body
+{
+	background-image: url('../img/background.jpg'); 
+	background-repeat: no-repeat;
+}
+.polaroid
+{
+	background-image: url('../img/polaroid.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 50%;
+	margin: 0 auto;
+
+}
+
+.img
+{
+
+	width: 82%;
+	padding-left:14%;
+	padding-top: 12%;
+	padding-bottom: 40%;
+}
