@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 04 Novembre 2015 à 14:22
+-- Généré le :  Mer 27 Janvier 2016 à 11:13
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
   `IngredientId` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) NOT NULL,
   `Prix` decimal(10,0) NOT NULL,
-  `premption` date NOT NULL,
+  `unite` varchar(255) NOT NULL,
   PRIMARY KEY (`IngredientId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
