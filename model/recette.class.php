@@ -85,20 +85,22 @@ Class Recette
 		echo json_encode($tab);
 	}
 
-	public static function getRecetteByAll($complexite, $note, $temps, $userId)
+	public static function getRecetteByAll($complexite, $note, $temps, $userId, $nbPersonne)
 	{
 		include('bdd.php');
-		$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps AND Note >= :note AND Complexite <= :complexite ");
-		$flag = array('temps'=>$temps, 'complexite'=> $complexite, 'note'=>$note);
+		$sql = $db->prepare("SELECT * FROM recette WHERE Temps <= :temps AND Note >= :note AND Complexite <= :complexite AND nbPersonne = :nbPersonne");
+		$flag = array('temps'=>$temps, 'complexite'=> $complexite, 'note'=>$note, 'nbPersonne'=>$nbPersonne);
 		$sql->execute($flag);
-		$tab = array();
+		$tab2 = [];
+		$pourcent = 0;
 		while($columns = $sql->fetch())
 		{
-			$pourcent = json_decode(recette::getPourcentageIngredient($columns['RecetteId'],$userId));
-			$tab[$columns['RecetteId']] = $pourcent;
+			$pourcent = json_decode(recette::getPourcentageIngredient($columns[0][0],$userId),true);
+			$tab2[0][0] = $columns[0][0];
+			$tab2[0][1] = $pourcent;
+			$tab[] = $tab2;
 		}
-		arsort($tab);
-		echo json_encode($tab);
+		echo json_encode($tab2);
 	}
 
 	public static function getAllRecette($userId)
@@ -124,6 +126,7 @@ Class Recette
 		$sql->execute($flag);
 		$nbTrue = 0;
 		$nbFalse = 0;
+		$pourcent = 0;
 		while($ingredient = $sql->fetch())
 		{
 			$sql2 = $db->prepare('SELECT count(FrigoId) AS nb , quantite FROM frigo WHERE IngredientId = :ingredientId AND UserId = :userId');
@@ -146,6 +149,7 @@ Class Recette
 		{
 			$pourcent = $nbTrue/$total*100;
 		}
+		return $pourcent;
 		}
 		public static function addRecette($nomrecette, $complexite, $note, $temps, $nbpersonne, $description, $urlimg)
 		{

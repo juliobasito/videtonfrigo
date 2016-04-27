@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,45 +14,66 @@
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
-    <body>
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
 
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"></a>
-          </div>
+  <?php
+  include('menu.php');
+  $seeting = json_decode(file_get_contents('http://localhost:8888/videtonfrigo/getSeeting/'.$_SESSION['id']),true);
+  $content = json_decode(file_get_contents('http://localhost:8888/videtonfrigo/getRecetteByAll/'.$seeting[0][1].'/'.$seeting[0][0].'/'.$seeting[0][2].'/'.$_SESSION['id'].'/'.$seeting[0][4]),true);
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Accueil<span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Mon Frigo</a></li>
-              <li><a href="#">Paramètres</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
+  if(isset($_GET['i']))
+  {
+    $i = $_GET['i'];
+    if($i<sizeof($content))
+    {
+      $i++;
+    }
+  }
+  else 
+  {
+    $i = 1;
+  }
+  $recetteNow = json_decode(file_get_contents('http://localhost:8888/videtonfrigo/getRecetteByID/'.$content[$i-1][0][0]), true);
+    ?>
+  <!--TINDER-->
+  <?php if(sizeof($content)>0)
+  { ?>
+  <div class="polaroid">
+    <img class="img" src="img/recettes/<?php echo $recetteNow[7];?>">
+    <h3 class="polaroidTitre"><?php echo $recetteNow[1]; ?></h3>
+  </div>
+  <div class="stars">
+    <?php
+      $j=0;
+      while($j<$recetteNow[3])
+      {
+        echo'<img class="star left" src="img/etoile.png">';
+        $j++;
+      }?>
+  </div>
+  <div class="likebuttons">
+    <button class="likebutton left"><img src="img/like.png"></button>
+    <a href="index.php?i=<?php echo $i;?>"><button class="likebutton right"><img src="img/dislike.png"></button></a>
+  </div>
+  <?php } 
+  else
+  {
+  ?>
+  <div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  Aucune recettes trouvé
+</div>
+  <?php } ?>
 
-      <!--TINDER-->
-      <div class="polaroid">
-        <img class="img" src="img/recettes/1.jpg">
-      </div>
-
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
-    </body>
-    </html>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

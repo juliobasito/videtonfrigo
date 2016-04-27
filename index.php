@@ -14,6 +14,14 @@ $app = new \Slim\Slim(array(
 /*--------------------------------------------------
 						USER
 --------------------------------------------------*/
+$app->post('/updateSeeting', function () {
+	//renvoi les seetings de l'utilisateur
+	User::updateSeeting($_POST['complexite'],$_POST['temps'],$_POST['note'],$_POST['nbPersonne'],$_POST['userId']);
+});
+$app->get('/getSeeting/:userId', function ($userId) {
+	//renvoi les seetings de l'utilisateur
+	$seeting = User::getSeeting($userId);
+});
 $app->get('/getUser/:userId', function ($userId) {
 	//renvoi les infos de l'utilisateur
 	$user = User::getUser($userId);
@@ -169,8 +177,8 @@ $app->get('/getRecetteByTemps/:temps/:userId', function ($temps,$userId) {
 	//renvoi les recettes avec un temps < ou =
 	$recette = Recette::getRecetteByTemps($temps,$userId);
 });
-$app->get('/getRecetteByAll/:complexite/:note/:temps/:userId', function ($complexite, $note, $temps,$userId) {
-	$recette = Recette::getRecetteByAll($complexite, $note, $temps, $userId);
+$app->get('/getRecetteByAll/:complexite/:note/:temps/:userId/:nbPersonne', function ($complexite, $note, $temps,$userId, $nbPersonne) {
+	$recette = Recette::getRecetteByAll($complexite, $note, $temps, $userId, $nbPersonne);
 });
 $app->get('/getAllRecette/:userId', function ($userId) {
 	//renvoi toutes les recettes

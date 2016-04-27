@@ -3,14 +3,15 @@ class Frigo{
 	public static function getIngredientsFridge($userId)
 	{
 		include('bdd.php');
-		$sql = $db->prepare("SELECT * FROM ingredient i JOIN frigo f ON i.IngredientId = f.IngredientId WHERE f.UserId = :userId");
-		$flag = array('userId' =>$userId);
+		$sql = $db->prepare("SELECT * FROM frigo f JOIN ingredient i ON f.IngredientId = i.IngredientId WHERE UserId = :userId ORDER BY category");
+		$flag = array('userId' => $userId);
 		$sql->execute($flag);
 		$tab = [];
 		while($donne = $sql->fetch())
 		{
 			$tab[] = $donne;
 		}
+
 		echo json_encode($tab);
 	}
 	public static function getIngredientsFridgeWithFiltre($userId, $filtre, $donnee)

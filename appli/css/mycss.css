@@ -3,12 +3,21 @@ body
 	background-image: url('../img/background.jpg'); 
 	background-repeat: no-repeat;
 }
+.white
+{
+	background-color: white;
+	background-image: none;
+}
+.menu
+{
+	padding-top: 20px;
+}
 .polaroid
 {
 	background-image: url('../img/polaroid.png');
 	background-repeat: no-repeat;
 	background-size: 100%;
-	width: 50%;
+	width: 80%;
 	margin: 0 auto;
 
 }
@@ -19,5 +28,98 @@ body
 	width: 82%;
 	padding-left:14%;
 	padding-top: 12%;
-	padding-bottom: 40%;
+}
+.likebuttons
+{
+	width:80%;
+	margin: 0 auto;
+	margin-top: 78px;
+}
+
+.likebutton
+{
+	width:50%;
+	background: none;
+	border: none;
+}
+
+.likebutton img
+{
+	width:100%;
+}
+.left
+{
+	float :left;
+}
+.right
+{
+	float: right;
+}
+.stars
+{
+	width:70%;
+	margin: 0 auto;
+}
+.star
+{
+	position:relative;
+	width:19%;
+}
+.imgFull
+{
+	width:100%;
+	margin-top: -10px;
+}
+
+.description
+{
+	width: 100%;
+	min-height: 220px;
+	background: white;
+	color: black;
+	text-align: center;
+}
+.center
+{
+	display: block;
+	margin:0 auto;
+}
+.button
+{
+	margin-bottom: 20px;
+	background-color:coral;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.polaroidTitre
+{
+	margin-top: 5%;
+    margin-left: 14%;
+    padding-bottom: 6%;
+}
+
+.width-80
+{
+	width: 80%;
+}
+.addIngr
+{
+	border-radius: 50px;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 100px;
+}
+
+.popup
+{
+	width:80%;
+	margin:0 auto;
+	background-color: white;
+	box-shadow: 10px 10px 5px #656565;
+	top:10px;
+	border: 1px solid #D4CECE;
+	padding: 10px;
+	margin-bottom: 20px;
+	display: none;
 }

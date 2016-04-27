@@ -4,7 +4,30 @@
 
 class User{
 
+	public static function updateSeeting($complexite,$temps,$note,$nbPersonne,$userId)
+	{
+		include('bdd.php');
+		$sql = "UPDATE seeting SET complexite = :complexite, temps = :temps, note = :note, nbPersonne = :nbPersonne WHERE userId = :userId";
+		$flag = array('complexite' => $complexite, 'temps' => $temps, 'note' => $note, 'nbPersonne'=> $nbPersonne, 'userId'=> $userId);
+		$result = $db->prepare($sql);
+		$columns = $result->execute($flag);
+	}
 
+	public static function getSeeting($userId)
+	{
+		include('bdd.php');
+		$sql = "SELECT * FROM seeting WHERE userId = :userId";
+		$flag = array('userId' => $userId);
+		$result = $db->prepare($sql);
+		$columns = $result->execute($flag);
+		$tab = [];
+		while($columns = $result->fetch())
+		{
+			$tab[] = $columns;
+		}
+		echo json_encode($tab);
+		
+	}
 	public static function connexion($pseudo, $password)
 	{
 		include('bdd.php');
@@ -22,6 +45,7 @@ class User{
 		{
 			$json = json_encode($columns['0']);
 		}
+		echo $json;
 	}
 	public static function UpdateUser($pseudo, $email, $password, $birthdate,$city,$budget, $id)
 	{
